@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>Prediction Result</h1>
+    <p class="muted">Demo only — not medical advice.</p>
+
+    <div class="card">
+      <div class="preview">
+        <img src="{{ url_for('file_serve', filename=filename) }}" alt="Uploaded image">
+      </div>
+
+      <table class="results">
+        <thead>
+          <tr><th>Rank</th><th>Label</th><th>Score</th></tr>
+        </thead>
+        <tbody>
+          {% for r in results %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ r.label }}</td>
+              <td>{{ '%.3f'|format(r.score) }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="actions">
+        <a href="{{ url_for('home') }}" class="btn">Classify another image</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+

@@ -1,1 +1,37 @@
-<h1>Medical Image Classifier</h1><p>Basic medical image classification demo using TensorFlow</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Medical Image Classifier (Demo)</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>Medical Image Classifier (Demo)</h1>
+    <p class="muted">Basic image classification using a pretrained CNN (MobileNetV2 on ImageNet). Demo only — not medical advice.</p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for msg in messages %}<div class="msg">{{ msg }}</div>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/predict" method="post" enctype="multipart/form-data" class="card">
+      <label for="image">Upload an image (PNG/JPG/GIF/BMP/WEBP)</label>
+      <input type="file" id="image" name="image" accept="image/*" required>
+      <button type="submit">Classify</button>
+    </form>
+
+    <section class="notes">
+      <h3>Notes</h3>
+      <ul>
+        <li>This demo uses <strong>ImageNet</strong> labels, not clinical classes.</li>
+        <li>For real medical use, replace the model with a validated medical model and add proper evaluation, disclaimers, and approvals.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
